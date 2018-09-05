@@ -3,6 +3,14 @@
 <head>
 	<title>CRUD</title>
 	<% include ../partials/head %>
+	<style type="text/css">
+		form {
+			margin: 0 auto;
+		}
+		h1 {
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
 	<header>
@@ -10,15 +18,16 @@
 	</header>
 	<div class="jumbotron">
 		<h1>Create an new user</h1>
-		<form>
-			<input type="text" name="name " required="required">
-			<input type="text" placeholder="Class Name" name="class">
-			<input type="email" placeholder="Email" name="email"  required="required">
-			<select>
+		<form class="form-group" action="/" method="POST" style="width:30%">
+			<input class="form-control" type="text" name="name" required="required">
+			<input class="form-control" type="text" placeholder="Class Name" name="class">
+			<input class="form-control" type="email" placeholder="Email" name="email"  required="required">
+			<input class="form-control" type="date"  name="dob"  required="required">
+			<select class="form-control" name="gender">
 			  <option value="male">male</option>
 			  <option value="female">female</option>
 			</select>
-
+			<input class= "btn btn-default btn-primary" type="submit">
 		</form>
 	</div>
 

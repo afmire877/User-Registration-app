@@ -28,7 +28,15 @@ var userSchema = new mongoose.Schema({
 })
 
 
+var User = mongoose.model("user", userSchema);
 
+// User.create({
+// 	name: "Ahmed",
+// 	gender: "male",
+// 	class: "first",
+// 	email : "email",
+// 	DOB: "",
+// })
 // ROUTES 
 
 
@@ -40,7 +48,29 @@ app.get("/new", function(req, res){
 	res.render("pages/new.ejs")
 });
 
-app.post("/new", function(req, res){
+app.post("/", function(req, res){
+	console.log(req.body);
+	var name = req.body.name;
+	var Class = req.body.class;
+	var gender = req.body.gender;
+	var email = req.body.email;
+	var dob = req.body.dob;
+	var userobj = {
+		name: name,
+		gender: gender,
+		class: Class ,
+		email : email,
+		DOB: dob,
+	};
+	User.create(userobj, function(err , user ) {
+		if(err){
+			console.log("error");
+		}else {
+			console.log("New user has been added");
+			console.log(user);
+		}
+	} );
+	res.redirect("/");
 	
 })
 

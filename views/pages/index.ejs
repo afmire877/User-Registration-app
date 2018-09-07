@@ -10,6 +10,7 @@
 	</header>
 	<div class="jumbotron">
 		<h1>This the index page</h1>
+
 		<table class="table">
 			<thead>
 				<tr>
@@ -19,12 +20,27 @@
 					<th>D.O.B</th>
 					<th>Email</th>
 					<th>Class</th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-				<% users.forEach(function(user){  %> 
+				<% user.forEach(function(user){  %> 
+				<%  var date = new Date(user.DOB); 
+					var m = date.getMonth();
+					var d = date.getDate();
+					var y = date.getFullYear();
+				%>
 					<tr>
+						<td><%= user._id %></td>
 						<td><%= user.name %></td>
+						<td><%= user.gender %></td>
+						<td><%= d + "/" + m + "/" + y %></td>
+						<td><%= user.email %></td>
+						<td><%= user.class %></td>
+						<td><a href="/<%= user._id %>/edit" class="btn btn-warning ">Edit</td>
+						<td><a href="#" class="btn btn-danger">Delete</a></td>
+s
 					</tr>
 				<% }) %>
 				

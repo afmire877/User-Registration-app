@@ -24,24 +24,25 @@ var userSchema = new mongoose.Schema({
 	gender: String,
 	class: String,
 	email : String,
-	DOB: Date,
+	DOB : Date,
 })
 
 
 var User = mongoose.model("user", userSchema);
 
-// User.create({
-// 	name: "Ahmed",
-// 	gender: "male",
-// 	class: "first",
-// 	email : "email",
-// 	DOB: "",
-// })
 // ROUTES 
 
 
+
 app.get("/", function(req , res) {
-	res.render("pages/index.ejs");
+		User.find({} ,function(err , user){
+				if(err){
+					console.log("Error");
+					console.log(err);
+				}else {
+					res.render("pages/index.ejs" ,{user : user})
+				};
+	}); 
 });
 
 app.get("/new", function(req, res){
@@ -49,18 +50,14 @@ app.get("/new", function(req, res){
 });
 
 app.post("/", function(req, res){
-	console.log(req.body);
-	var name = req.body.name;
-	var Class = req.body.class;
-	var gender = req.body.gender;
-	var email = req.body.email;
-	var dob = req.body.dob;
+	var User = User.users.find({});
+	console.log(User);
 	var userobj = {
-		name: name,
-		gender: gender,
-		class: Class ,
-		email : email,
-		DOB: dob,
+		name: req.body.name,
+		gender: req.body.gender,
+		class: req.body.class ,
+		email : req.body.email,
+		DOB : req.body.dob,
 	};
 	User.create(userobj, function(err , user ) {
 		if(err){
@@ -68,13 +65,46 @@ app.post("/", function(req, res){
 		}else {
 			console.log("New user has been added");
 			console.log(user);
+
 		}
 	} );
 	res.redirect("/");
 	
 })
 
+app.get("/:id", function(req , res) {
+	// body...
+})
+app.get("/:id/edit", function(req , res) {
 
+	User.findById( req.params.id  , function(err , user){
+		if(err){
+			res.redirect("/");
+		}else {
+			res.render("pages/edit.ejs", { user : user})
+		}
+	});
+})
+app.put("/:id", function(req , res) {
+	User.findByIdAndUpdate( {} , function(err , ){
+		if(err){
+
+		}else{
+
+		}
+	});
+	res.redirect();
+})
+app.delete("/:id", function(req , res) {
+	User.findByIdAndRemove( {}  , function(err , ){
+		if(err){
+
+		}else{
+
+		}
+	});
+	res.redirect();
+})
 
 app.listen(8080);
 console.log("The server has been started");

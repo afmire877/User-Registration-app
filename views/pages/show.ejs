@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+		<% include ../partials/head %>
+</head>
+<body>
+		<% include ../partials/header %>
+		<h1>THis the Show page </h1>
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td><%= user.name %></td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><%= user.email %></td>
+			</tr>
+			<tr>
+				<td>Gender:  </td>
+				<td> <%= user.gender %></td>
+			</tr>
+			<tr>
+				<%  var date = new Date(user.DOB); 
+					var m = date.getMonth();
+					var d = date.getDate();
+					var y = date.getFullYear();
+				%>
+				<td>Date of Birth:</td>
+				<td><%= d + "/" + m + "/" + y %></td>
+			</tr>
+		</table>
+
+<footer>
+		<% include ../partials/footer %>
+</footer>
+</body>
+</html>

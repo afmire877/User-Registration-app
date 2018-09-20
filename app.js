@@ -1,11 +1,12 @@
 var express    = require("express"),
+	methodOverride = require("method-override"),
 	mongoose   = require("mongoose"),
 	bodyParser = require("body-parser"),
 	app        = express();
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended : true}));
-
+app.use(methodOverride("_method"));
 
 //Mongoose setup
 mongoose.connect("mongodb://localhost:27017/crud_app", {useNewUrlParser: true});
@@ -89,7 +90,6 @@ app.get("/:id", function(req , res) {
 
 //Edit 
 app.get("/:id/edit", function(req , res) {
-
 	User.findById( req.params.id  , function(err , user){
 		if(err){
 			res.redirect("/");
@@ -108,6 +108,12 @@ app.put("/:id", function(req , res) {
 	});
 	res.redirect();
 })
+
+//UPDATE Route 
+app.put("/:id", function(req, res){
+	res.send("UPDATE");
+});
+
 app.delete("/:id", function(req , res) {
 	User.findByIdAndRemove( {}  , function(err , ){
 		if(err){

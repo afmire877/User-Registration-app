@@ -6,19 +6,21 @@
 </head>
 <body>
 		<% include ../partials/header %>
-		<h1>THis the Show page </h1>
-		<table>
+		<h1>This is all the Information on <%= user.name %> </h1>
+		<table class="table">
+			<td><img src="assets/img/profile-placeholder.jpg"></td>
 			<tr>
-				<td>Name:</td>
+
+				<td scope="row">Name:</td>
 				<td><%= user.name %></td>
 			</tr>
 			<tr>
-				<td>Email:</td>
+				<td scope="row">Email:</td>
 				<td><%= user.email %></td>
 			</tr>
 			<tr>
-				<td>Gender:  </td>
-				<td> <%= user.gender %></td>
+				<td scope="row" >Gender:  </td>
+				<td > <%= user.gender %></td>
 			</tr>
 			<tr>
 				<%  var date = new Date(user.DOB); 

@@ -45,6 +45,7 @@ app.get("/", function(req , res) {
 	}); 
 });
 
+//Create Route
 app.get("/new", function(req, res){
 	res.render("pages/new.ejs")
 });
@@ -70,11 +71,23 @@ app.post("/", function(req, res){
 	} );
 	res.redirect("/");
 	
-})
+});
+
+//Show Route
 
 app.get("/:id", function(req , res) {
-	// body...
-})
+	User.findById( req.params.id  , function(err , user){
+	if(err){
+		res.redirect("/");
+	}else {
+		res.render("pages/show.ejs",{ user : user});
+	}
+	});
+});
+
+
+
+//Edit 
 app.get("/:id/edit", function(req , res) {
 
 	User.findById( req.params.id  , function(err , user){

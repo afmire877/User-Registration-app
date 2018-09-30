@@ -1,12 +1,12 @@
 var express    = require("express"),
-	methodOverride = require("method-override"),
+	methodOverride = require('method-override'),
 	mongoose   = require("mongoose"),
 	bodyParser = require("body-parser"),
 	app        = express();
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended : true}));
-app.use(methodOverride("_method"));
+app.use(methodOverride('_method'));
 
 //Mongoose setup
 mongoose.connect("mongodb://localhost:27017/crud_app", {useNewUrlParser: true});
@@ -98,30 +98,32 @@ app.get("/:id/edit", function(req , res) {
 		}
 	});
 })
-app.put("/:id", function(req , res) {
-	User.findByIdAndUpdate( {} , function(err , ){
-		if(err){
-
-		}else{
-
-		}
-	});
-	res.redirect();
-})
+// app.put("/:id", function(req , res) {
+// 	res.redirect();
+// })
 
 //UPDATE Route 
 app.put("/:id", function(req, res){
-	res.send("UPDATE");
+		User.findByIdAndUpdate( req.params.id , req.body , function(err , updateduser){
+		if(err){
+			res.send('error');
+		}else{
+			res.redirect('/');
+		}
+		});
+
+
 });
 
 app.delete("/:id", function(req , res) {
-	User.findByIdAndRemove( {}  , function(err , ){
+	User.findByIdAndRemove( req.params.id , req.body , function(err , updateduser){
 		if(err){
-
+			res.redirect('/');
 		}else{
-
+			console.log(req.body.user);
+			res.redirect('/' + req.params.id );
 		}
-	});
+		});
 	res.redirect();
 })
 

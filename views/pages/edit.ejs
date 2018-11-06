@@ -21,7 +21,7 @@
 		<form class="form-group" method="POST" action="/<%= user._id %>?_method=PUT"   style="width:30%">
 			<input class="form-control"  type="text" value="<%= user.name %>" name="name" required="required">
 			<input class="form-control"   type="text" value="<%= user.class %>"   name="class">
-			<input class="form-control"  type="email" value="<%= user.email %>"  name="email"  required="required">
+			<input class="form-control"  type="email" value="<%= user.email %>"  name="email"  >
 			<input class="form-control"  type="date" value="<%= user.DOB %>"  name="dob" >
 			<select class="form-control" value="<%= user.gender %>" name="gender">
 			  <option value="male">male</option>

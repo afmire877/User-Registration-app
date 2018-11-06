@@ -41,7 +41,10 @@
 						<td><%= user.class %></td>
 						<td><a href="/<%= user._id %>" class="btn btn-primary ">View</td>
 						<td><a href="/<%= user._id %>/edit" class="btn btn-warning ">Edit</td>
-						<td><a href="/<%= user._id %>" class="btn btn-danger">Delete</a></td>
+						<form method="POST" action="/<%= user._id %>/delete?_method=DELETE"   >
+							<td><input type="submit" class="btn btn-danger"  value="delete"></td>
+						</form>
+						
 					</tr>
 				<% }) %>
 				
@@ -55,6 +58,7 @@
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
+	<script src="main.js"></script>
 </body>
 </html>
 

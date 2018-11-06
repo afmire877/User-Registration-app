@@ -52,25 +52,25 @@ app.get("/new", function(req, res){
 });
 
 app.post("/", function(req, res){
-	var User = User.users.find({});
-	console.log(User);
-	var userobj = {
-		name: req.body.name,
-		gender: req.body.gender,
-		class: req.body.class ,
-		email : req.body.email,
-		DOB : req.body.dob,
-	};
-	User.create(userobj, function(err , user ) {
-		if(err){
-			console.log("error");
-		}else {
-			console.log("New user has been added");
-			console.log(user);
+	//var User = User.users.find({});
+	console.log(User.collections.users.find({}));
+	// var userobj = {
+	// 	name: req.body.name,
+	// 	gender: req.body.gender,
+	// 	class: req.body.class ,
+	// 	email : req.body.email,
+	// 	DOB : req.body.dob,
+	// };
+	// User.create(userobj, function(err , user ) {
+	// 	if(err){
+	// 		console.log("error");
+	// 	}else {
+	// 		console.log("New user has been added");
+	// 		console.log(user);
 
-		}
-	} );
-	res.redirect("/");
+	// 	}
+	// } );
+	 res.redirect("/");
 	
 });
 
@@ -115,17 +115,19 @@ app.put("/:id", function(req, res){
 
 });
 
-app.delete("/:id", function(req , res) {
-	User.findByIdAndRemove( req.params.id , req.body , function(err , updateduser){
-		if(err){
-			res.redirect('/');
-		}else{
-			console.log(req.body.user);
-			res.redirect('/' + req.params.id );
-		}
+app.delete("/:id/delete", function(req , res) {
+		User.findByIdAndRemove( req.params.id, function(err , updateduser){
+			if(err){
+				res.send("There has been an error")
+			}else{
+				// console.log (updateduser);
+				// res.send('Deleted successfully!');
+				// window.location.reload(true);
+			};
 		});
-	res.redirect();
-})
+
+});
+
 
 app.listen(8080);
 console.log("The server has been started at 8080");
